@@ -11,3 +11,4 @@ npm run dev
 
 - [Next.js](https://nextjs.org/)
 - [Vercel deployment](https://vercel.com/docs)
+- [emotion.js](https://emotion.sh/docs/introduction)
