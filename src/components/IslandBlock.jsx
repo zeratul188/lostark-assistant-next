@@ -142,7 +142,7 @@ const IslandBlock = (props) => {
                 grid-template-columns: 1fr 2fr;
             }
         `}>
-            <Image src={IslandPngs[findImage(props.island.name)]} alt='island1'/>
+            <Image src={IslandPngs[findImage(props.island.name)]} alt='island1' key={findImage(props.island.name)}/>
             <div css={css`
                 padding: 10px;
                 margin-left: 10px;

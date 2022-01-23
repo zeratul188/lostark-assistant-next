@@ -23,7 +23,7 @@ export default function Home() {
             grid-template-columns: 1;
 
             @media screen and (min-width: ${breakpoints.maxblock}) {
-              width: 1200px;
+              width: 1400px;
               grid-template-columns: 3fr 30px 1fr;
               grid-template-rows: 1;
             }
