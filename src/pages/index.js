@@ -3,10 +3,14 @@ import {css} from '@emotion/react'
 import MainContainer from '@src/components/main-container'
 import SubContainer from '@src/components/sub-container'
 import breakpoints from '@src/styles/breakpoints';
+import Head from 'next/head';
 
 export default function Home() {
   return (
       <>
+        <Head>
+          <title>로스트아크 어시스턴트</title>
+        </Head>
         <div css={css`
           display: flex;
           justify-content: center;
