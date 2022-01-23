@@ -1,15 +1,13 @@
 import {Global, css} from '@emotion/react'
 import colors from '@src/styles/colors';
 
-const GlobalStyle = () => {
+const IslandStyle = () => {
   return (
     <Global styles={css`
       html {
-        width: 100vw;
         padding: 0;
         margin: 0;
         background-color: ${colors.background};
-        color: #FFFFFF;
       }
 
       body {
@@ -19,4 +17,4 @@ const GlobalStyle = () => {
   )
 }
 
-export default GlobalStyle;
+export default IslandStyle;
