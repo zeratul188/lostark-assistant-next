@@ -1,6 +1,8 @@
 import {css} from '@emotion/react';
 import Image from 'next/image';
 import breakpoints from '@src/styles/breakpoints';
+import fontsize from '@src/styles/fontsizes';
+import colors from '@src/styles/colors';
 
 import IslandPng1 from '@src/assets/island/is1.png';
 import IslandPng2 from '@src/assets/island/is2.png';
@@ -121,8 +123,20 @@ const AwardBlock = (props) => {
     const blocks = [];
     for (let i = 0; i < formatPosition(props.awards).length; i++) {
         blocks.push(
-            <Image src={AwardPngs[formatPosition(props.awards)[i]]} width={40} height={40} key={i}/>
-        )
+            <span css={css`
+                position: relative;
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+
+                @media screen and (min-width: ${breakpoints.tablet}) {
+                  width: 40px;
+                  height: 40px;
+                }
+            `} key={'aw'+(props.index+1)+i} >
+                <Image src={AwardPngs[formatPosition(props.awards)[i]]} layout='responsive' objectFit='contain' alt={'aw'+(props.index+1)+i}/>
+            </span>
+        );
     }
     return blocks;
 }
@@ -142,27 +156,28 @@ const IslandBlock = (props) => {
                 grid-template-columns: 1fr 2fr;
             }
         `}>
-            <Image src={IslandPngs[findImage(props.island.name)]} alt='island1' key={findImage(props.island.name)}/>
+            <Image src={IslandPngs[findImage(props.island.name)]} alt='island1'/>
             <div css={css`
                 padding: 10px;
                 margin-left: 10px;
             `}>
                 <p css={css`
-                    color: #FFCA45;
+                    color: ${colors.object_title};
                     margin: 0;
-                    font-size: 14pt;
+                    font-size: ${fontsize.title}pt;
+                    font-weight: bold;
                 `}>{props.island.name}</p>
                 <p css={css`
                     font-size: 10pt;
                     color: #AAAAAA;
                     margin: 0;
-                    padding-top: 10px;
+                    padding-top: ${fontsize.content}px;
                     padding-bottom: 5px;
                 `}>보상 내용</p>
                 <div css={css`
                     display: inline-block;
                 `}>
-                    <AwardBlock awards={props.island.awards}/>
+                    <AwardBlock awards={props.island.awards} index={props.index}/>
                 </div>
             </div>
         </div>

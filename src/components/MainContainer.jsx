@@ -1,6 +1,7 @@
 import {css} from '@emotion/react';
 
 import IslandContainer from '@src/components/island-page';
+import BossContainer from './BossContainer';
 
 const MainContainer = () => {
     return (
@@ -8,6 +9,7 @@ const MainContainer = () => {
             width: 100%;
         `}>
             <IslandContainer />
+            <BossContainer />
         </div>
     )
 }
