@@ -2,6 +2,7 @@ import {css} from '@emotion/react';
 
 import IslandContainer from '@src/components/island-page';
 import BossContainer from './BossContainer';
+import DungeonContainer from './DungeonContainer';
 
 const MainContainer = () => {
     return (
@@ -10,6 +11,7 @@ const MainContainer = () => {
         `}>
             <IslandContainer />
             <BossContainer />
+            <DungeonContainer />
         </div>
     )
 }

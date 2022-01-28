@@ -1,8 +1,8 @@
 const fontsize = {
-    title: 12,
-    content: 10,
-    categories: 11,
-    categories_big: 14
+    title: 14,
+    content: 12,
+    categories: 13,
+    categories_big: 16
 }
 
 export default fontsize;

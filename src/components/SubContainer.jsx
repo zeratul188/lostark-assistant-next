@@ -1,6 +1,8 @@
 import {css} from '@emotion/react';
 
 import NoticeContainer from './NoticeContainer';
+import UpdateContainer from './UpdateContainer';
+import PlaystoreContainer from './PlaystoreContainer';
 
 const SubContainer = () => {
     return (
@@ -9,6 +11,8 @@ const SubContainer = () => {
                 width: 100%;
             `}>
                 <NoticeContainer />
+                <UpdateContainer />
+                <PlaystoreContainer />
             </div>
         </>
     )
