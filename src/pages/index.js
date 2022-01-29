@@ -19,6 +19,7 @@ export default function Home() {
           <div css={css`
             width: 100%;
             display: grid;
+            margin-top: 100px;
             grid-template-rows: 1fr 30px 1fr;
             grid-template-columns: 1;
 

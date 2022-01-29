@@ -11,9 +11,6 @@ import React from 'react';
 class NoticeContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.setState({
-            notice: ''
-        });
         this.getNoticeData();
     }
 

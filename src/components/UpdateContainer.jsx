@@ -77,13 +77,6 @@ class UpdateContainer extends React.Component {
             left_display: 'hidden',
             right_display: 'visible'
         };
-        this.setState({
-            index: 0,
-            max: 0,
-            updates: Array(5).fill(null),
-            left_display: 'hidden',
-            right_display: 'visible'
-        });
         this.syncFirebase();
     }
 

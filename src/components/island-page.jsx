@@ -15,9 +15,6 @@ var islands = [];
 class IslandBlocks extends React.Component {
     constructor(props) {
         super(props);
-        this.setState({
-            islands: []
-        });
         this.getIslandData();
     }
 
@@ -62,6 +59,95 @@ class IslandBlocks extends React.Component {
 }
 
 class IslandContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.str = '';
+        this.state = {
+            time: 0
+        };
+        this.setStartDate();
+    }
+
+    startTimeThread(date) {
+        var now = new Date();
+        let time = date.getTime() - now.getTime();
+        time = Math.floor(time/1000);
+        var interval = setInterval(() => {
+            if (time <= 0) {
+                clearInterval(interval);
+            }
+            time--;
+            this.setState({
+                time: time
+            });
+        }, 1000);
+    }
+
+    setStartDate() {
+        var today = new Date();
+        let now_hour = today.getHours();
+        let day = today.getDay();
+        var next_hour = 0;
+
+        if (now_hour < 9) {
+            if (day === 0 || day === 6) {
+                next_hour = 9;
+            } else {
+                next_hour = 11;
+            }
+        } else if (now_hour >= 9 && now_hour < 11) {
+            next_hour = 11;
+        } else if (now_hour >= 11 && now_hour < 13) {
+            next_hour = 13;
+        } else if (now_hour >= 13 && now_hour < 19) {
+            next_hour = 19;
+        } else if (now_hour >= 19 && now_hour < 21) {
+            next_hour = 21;
+        } else if (now_hour >= 21 && now_hour < 23) {
+            next_hour = 23;
+        } else {
+            today.setDate(today.getDate()+1);
+            day = today.getDay();
+            if (day === 0 || day === 6) {
+                next_hour = 9;
+            } else {
+                next_hour = 11;
+            }
+        }
+
+        var str = '';
+        str += today.getFullYear()+'년 ';
+        str += (today.getMonth()+1)+'월 ';
+        str += today.getDate()+'일 ';
+        str += next_hour+'시에 시작';
+
+        today.setHours(next_hour);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        this.str = str;
+        this.startTimeThread(today);
+    }
+
+    getTimeString(time) {
+        var str = '';
+        if (Math.floor(time/3600) !== 0) {
+            str += Math.floor(time/3600)+'시간 ';
+        }
+        time %= 3600;
+        if (Math.floor(time/60) !== 0) {
+            str += Math.floor(time/60)+'분 ';
+        }
+        time %= 60;
+        if (time !== 0) {
+            str += time+'초';
+        }
+
+        if (str === '') {
+            str = '출현 중';
+        }
+        return str;
+    }
+
     render() {
         return (
             <>
@@ -73,11 +159,12 @@ class IslandContainer extends React.Component {
                         margin-left: 20px;
                         font-size: ${fontsize.title}pt;
                         color: ${colors.object_sub};
-                    `}>2022년 19시에 시작</span>
+                    `}>{this.str}</span>
                     <span css={css`
                         float: right;
                         font-size: ${fontsize.title}pt;
-                    `}>2시간 20분 28초</span>
+                        color: ${colors.entersix};
+                    `}>{this.getTimeString(this.state.time)}</span>
                 </BlockTitle>
                 <BlockContent>
                     <IslandBlocks />

@@ -55,9 +55,6 @@ var bosses = [];
 class BossBlocks extends React.Component {
     constructor(props) {
         super(props);
-        this.setState({
-            bosses: []
-        });
         this.getBossData();
     }
 

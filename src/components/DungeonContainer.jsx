@@ -36,11 +36,6 @@ class DungeonContainer extends React.Component {
             reycle: 1,
             date: ''
         };
-        this.setState({
-            name: [],
-            reycle: 1,
-            date: ''
-        });
         this.syncFirebase();
     }
 

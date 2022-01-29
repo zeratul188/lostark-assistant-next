@@ -16,6 +16,8 @@ const Header = () => {
       display: flex;
       justify-content: center;
       position: relative;
+      position: fixed;
+      z-index: 1;
 
       @media screen and (min-width: ${breakpoints.tablet}) {
         height: 80px;
