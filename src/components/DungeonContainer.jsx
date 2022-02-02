@@ -2,6 +2,7 @@ import {css} from '@emotion/react';
 import fontsize from '@src/styles/fontsizes';
 import colors from '@src/styles/colors';
 import Image from 'next/image';
+import breakpoints from '@src/styles/breakpoints';
 
 import BlockTitle from './BlockTitle';
 import BlockContent from './BlockContent';
@@ -9,15 +10,10 @@ import BlockContent from './BlockContent';
 import { ref, onValue } from "firebase/database";
 import database from '@src/scripts/firebase-database';
 import React from 'react';
+import storage from '@src/scripts/firebase-storage';
+import { getDownloadURL, ref as storageReference } from "firebase/storage";
 
-import DungeonPng1 from '@src/assets/dungeons/dg1.png';
-import DungeonPng2 from '@src/assets/dungeons/dg2.png';
-import DungeonPng3 from '@src/assets/dungeons/dg3.png';
-
-var DungeonPngs = [];
-DungeonPngs.push(DungeonPng1);
-DungeonPngs.push(DungeonPng2);
-DungeonPngs.push(DungeonPng3);
+import EmptyIslandPng from '@src/assets/empty-island.png';
 
 var dungeons = [
     '마수의 골짜기',
@@ -34,7 +30,8 @@ class DungeonContainer extends React.Component {
         this.state = {
             name: [],
             reycle: 1,
-            date: ''
+            date: '',
+            imgurl: ''
         };
         this.syncFirebase();
     }
@@ -53,6 +50,13 @@ class DungeonContainer extends React.Component {
                         break;
                 }
             });
+            getDownloadURL(storageReference(storage, 'Assets/Dungeon/dg'+reycle+'.png')).then((url) => {
+                this.setState({
+                    imgurl: url
+                });
+            }).catch((error) => {
+                // Handle any errors
+            });
             if (startdate !== '') {
                 var date = new Date(startdate);
                 var str = date.getFullYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDate()+"일 ~ ";
@@ -67,6 +71,14 @@ class DungeonContainer extends React.Component {
         });
     }
 
+    getDungeonImage() {
+        if (this.state.imgurl === '') {
+            return EmptyIslandPng;
+        } else {
+            return this.state.imgurl;
+        }
+    }
+
     render() {
         return(
             <>
@@ -78,10 +90,14 @@ class DungeonContainer extends React.Component {
                 <BlockContent>
                     <div css={css`
                         width: 100%;
-                        height: 100%;
+                        height: 40vw;
                         position: relative;
+
+                        @media screen and (min-width: ${breakpoints.maxblock}) {
+                            height: 360px;
+                        }
                     `}>
-                        <Image src={DungeonPngs[this.state.reycle-1]} alt={'dungeonImg'} layout='responsive' objectFit='contain'/>
+                        <Image src={this.getDungeonImage()} alt={'dungeonImg'} layout='fill' objectFit="fill"/>
                     </div>
                     <div css={css`
                         display: grid;

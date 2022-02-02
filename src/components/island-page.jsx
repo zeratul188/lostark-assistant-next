@@ -9,8 +9,36 @@ import IslandBlock from './IslandBlock';
 import database from '@src/scripts/firebase-database';
 import { ref, onValue } from "firebase/database";
 import React from 'react';
+import storage from '@src/scripts/firebase-storage';
+import { getDownloadURL, ref as storageReference } from "firebase/storage";
 
 var islands = [];
+var islandStrings = ['하모니 섬', '볼라르 섬', '고요한 안식의 섬', '죽음의 협곡', '포르페', '블루홀 섬', '기회의 섬', '몬테섬', '수라도', '메데이아', '우거진 갈대의 섬', '환영 나비 섬', '쿵덕쿵 아일랜드', '스노우팡 아일랜드'];
+var awardStrings = [
+    '골드',
+    '실링',
+    '대양의 주화 상자',
+    '카드 팩',
+    '영혼의 잎사귀',
+    '섬의 마음',
+    '인연의 돌',
+    '해적 주화',
+    '크림스네일의 동전',
+    '선혈의 조각',
+    '조사용 토끼발 망치',
+    '천상의 하모니',
+    '황혼의 레퀴엠',
+    '비밀지도',
+    '희귀 수호 룬',
+    '영웅 수호 룬',
+    '영웅 풍요 룬',
+    '모험물 : 환영나비',
+    '모험물 : 죽은 자의 눈',
+    '모험물 : 의문의 상자',
+    '아드린느 카드',
+    '수신 아포라스 카드',
+    '탈 것 : 붉은 갈기 늑대'
+];
 
 class IslandBlocks extends React.Component {
     constructor(props) {
@@ -21,25 +49,38 @@ class IslandBlocks extends React.Component {
     getIslandData() {
         var islandRef = ref(database, 'island');
         onValue(islandRef, (snapshot) => {
-            var index = 0;
             snapshot.forEach((dinoSnapshot) => {
                 var island = {
                     imgurl: '',
                     name: '',
                     awards: []
                 }
+                var texts = [];
                 dinoSnapshot.forEach((semiSnapshot) => {
-                    if (semiSnapshot.key === 'image') {
-                        island.imgurl = semiSnapshot.val().substr(2, semiSnapshot.val().length);
-                    } else if (semiSnapshot.key === 'name') {
+                    if (semiSnapshot.key === 'name') {
                         island.name = semiSnapshot.val();
                     } else if (semiSnapshot.key === 'award') {
-                        island.awards = semiSnapshot.val().split('|');
+                        texts = semiSnapshot.val().split('|');
                     }
                 });
-                islands[index] = island;
-                index++;
+                const position = islandStrings.indexOf(island.name);
+                getDownloadURL(storageReference(storage, 'Assets/Island/is'+(position+1)+'.png')).then((url) => {
+                    island.imgurl = url;
+                }).catch((error) => {
+                    // Handle any errors
+                });
+                var urls = [];
+                for (let i = 0; i < texts.length; i++) {
+                    const award_position = awardStrings.indexOf(texts[i]);
+                    getDownloadURL(storageReference(storage, 'Assets/IslandAwards/ii'+(award_position+1)+'.png')).then((url) => {
+                        island.awards.push(url);
+                    }).catch((error) => {
+                        island.awards.push('');
+                    });
+                }
+                islands.push(island);
             });
+
             this.setState({
                 islands: islands
             });
@@ -162,9 +203,16 @@ class IslandContainer extends React.Component {
                     `}>{this.str}</span>
                     <span css={css`
                         float: right;
+                        display: block;
                         font-size: ${fontsize.title}pt;
-                        color: ${colors.entersix};
-                    `}>{this.getTimeString(this.state.time)}</span>
+                    `}>
+                        <span css={css`
+                            color: ${colors.object_sub};
+                        `}>남은 시간 : </span>
+                        <span css={css`
+                            color: ${colors.entersix};
+                        `}>{this.getTimeString(this.state.time)}</span>
+                    </span>
                 </BlockTitle>
                 <BlockContent>
                     <IslandBlocks />
