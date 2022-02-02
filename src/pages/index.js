@@ -14,7 +14,11 @@ export default function Home() {
         <div css={css`
           display: flex;
           justify-content: center;
-          padding: 20px;
+          padding: 10px;
+
+          @media screen and (min-width: ${breakpoints.tablet}) {
+            padding: 20px;
+          }
         `}>
           <div css={css`
             width: 100%;
