@@ -1,5 +1,5 @@
-import { initializeApp } from 'firebase/app';
-import { getDatabase } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import { getStorage, ref } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCF9HsrXVCPvKQR0iZSI5ID-XdPX-xeg30",
@@ -9,6 +9,6 @@ const firebaseConfig = {
 };
 
 var firebase = initializeApp(firebaseConfig);
-var database = getDatabase(firebase);
+var storage = getStorage(firebase, 'gs://lostarkhub-cbe60.appspot.com');
 
-export default database;
+export default storage;

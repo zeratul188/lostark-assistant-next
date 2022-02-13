@@ -4,7 +4,7 @@ import breakpoints from '@src/styles/breakpoints';
 const BlockTitle = (props) => {
     return (
         <div {...props} css={css`
-            margin-top: ${props.marginTop};
+            margin-top: ${props.margintop};
             background-color: #191b20;
             padding: 15px;
             font-size: 10pt;
