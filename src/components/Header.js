@@ -1,7 +1,9 @@
 import {css} from '@emotion/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import colors from '@src/styles/colors';
+import fontsize from '@src/styles/fontsizes';
 import breakpoints from '@src/styles/breakpoints';
 import LogoTitlePng from '@src/assets/logo-title.png';
 import LogoPng from '@src/assets/logo.png';
@@ -76,9 +78,57 @@ const Header = () => {
               display: inline-block;
             }
           `}>
-            <CategoryButton value='어빌리티 스톤 세공 시뮬' />
-            <CategoryButton value='각인 계산서 시뮬' />
-            <CategoryButton value='스킬 시뮬' />
+            <Link href='/stone' title='Stone Page'>
+              <a css={css`
+                background-color: transparent;
+                border: 0;
+                color: #FFFFFF;
+                margin-right: 30px;
+                font-size: ${fontsize.categories}pt;
+    
+                :hover {
+                    cursor: pointer;
+                }
+    
+                @media screen and (min-width: ${breakpoints.tablet}) {
+                  font-size: ${fontsize.categories_big}pt;
+                }
+              `}>어빌리티 스톤 세공 시뮬</a>
+            </Link>
+            <Link href='/stone' title='Stone Page'>
+              <a css={css`
+                background-color: transparent;
+                border: 0;
+                color: #FFFFFF;
+                margin-right: 30px;
+                font-size: ${fontsize.categories}pt;
+    
+                :hover {
+                    cursor: pointer;
+                }
+    
+                @media screen and (min-width: ${breakpoints.tablet}) {
+                  font-size: ${fontsize.categories_big}pt;
+                }
+              `}>각인 계산서 시뮬</a>
+            </Link>
+            <Link href='/stone' title='Stone Page'>
+              <a css={css`
+                background-color: transparent;
+                border: 0;
+                color: #FFFFFF;
+                margin-right: 30px;
+                font-size: ${fontsize.categories}pt;
+    
+                :hover {
+                    cursor: pointer;
+                }
+    
+                @media screen and (min-width: ${breakpoints.tablet}) {
+                  font-size: ${fontsize.categories_big}pt;
+                }
+              `}>스킬 시뮬</a>
+            </Link>
           </div>
         </div>
         
