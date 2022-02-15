@@ -1,10 +1,35 @@
 import {css} from '@emotion/react'
+import React from 'react';
 
-import MainContainer from '@src/components/MainContainer'
-import SubContainer from '@src/components/SubContainer'
 import breakpoints from '@src/styles/breakpoints';
-import Head from 'next/head';
+import HomeContainer from '@src/components/HomeContainer';
 
+class Home extends React.Component {
+
+  render() {
+    return (
+      <>
+        <div css={css`
+          display: flex;
+          justify-content: center;
+          padding: 10px;
+
+          @media screen and (min-width: ${breakpoints.tablet}) {
+            padding: 20px;
+          }
+        `}>
+
+          <HomeContainer />
+
+        </div>
+      </>
+    );
+  }
+}
+
+export default Home;
+
+/*
 export default function Home() {
   return (
       <>
@@ -20,28 +45,13 @@ export default function Home() {
             padding: 20px;
           }
         `}>
-          <div css={css`
-            width: 100%;
-            display: grid;
-            margin-top: 50px;
-            grid-template-rows: 1fr 30px 1fr;
-            grid-template-columns: 1;
 
-            @media screen and (min-width: ${breakpoints.tablet}) {
-              margin-top: 100px;
-            }
+          <BrowserRouter>
+            <Route path='/' component={HomeContainer} exact/>
+          </BrowserRouter>
 
-            @media screen and (min-width: ${breakpoints.maxblock}) {
-              width: 1200px;
-              grid-template-columns: 3fr 30px 1fr;
-              grid-template-rows: 1;
-            }
-          `} >
-            <MainContainer/>
-            <div/>
-            <SubContainer />
-          </div>
         </div>
       </>
   )
 }
+*/
