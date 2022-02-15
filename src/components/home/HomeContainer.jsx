@@ -1,7 +1,7 @@
 import {css} from '@emotion/react';
 
-import MainContainer from '@src/components/MainContainer'
-import SubContainer from '@src/components/SubContainer'
+import MainContainer from '@src/components/home/MainContainer'
+import SubContainer from '@src/components/home/SubContainer'
 import breakpoints from '@src/styles/breakpoints';
 
 const HomeContainer = () => {

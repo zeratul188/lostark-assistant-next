@@ -2,8 +2,8 @@ import {css} from '@emotion/react';
 import Image from 'next/image';
 import fontsize from '@src/styles/fontsizes';
 
-import BlockTitle from './BlockTitle';
-import BlockContent from './BlockContent';
+import BlockTitle from '@src/components/BlockTitle';
+import BlockContent from '@src/components/BlockContent';
 
 import PlayPng from '@src/assets/playstore.png';
 

@@ -1,6 +1,6 @@
 import {css} from '@emotion/react';
 
-import IslandContainer from '@src/components/island-page';
+import IslandContainer from './island-page';
 import BossContainer from './BossContainer';
 import DungeonContainer from './DungeonContainer';
 import EventContainer from './EventContainer';

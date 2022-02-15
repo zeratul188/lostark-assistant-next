@@ -4,8 +4,8 @@ import Image from 'next/image';
 import colors from '@src/styles/colors';
 import breakpoints from '@src/styles/breakpoints';
 
-import BlockTitle from './BlockTitle';
-import BlockContent from './BlockContent';
+import BlockTitle from '@src/components/BlockTitle';
+import BlockContent from '@src/components/BlockContent';
 import React from 'react';
 
 class StoneContainer extends React.Component {
@@ -18,6 +18,9 @@ class StoneContainer extends React.Component {
                         font-size: ${fontsize.title}pt;
                     `}>증가 옵션</strong>
                 </BlockTitle>
+                <BlockContent padding='10px'>
+                    
+                </BlockContent>
             </>
         )
     }

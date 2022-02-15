@@ -2,7 +2,7 @@ import {css} from '@emotion/react'
 import React from 'react';
 
 import breakpoints from '@src/styles/breakpoints';
-import HomeContainer from '@src/components/HomeContainer';
+import HomeContainer from '@src/components/home/HomeContainer';
 
 class Home extends React.Component {
 

@@ -3,7 +3,7 @@ import fontsize from '@src/styles/fontsizes';
 import colors from '@src/styles/colors';
 
 import BlockTitle from '@src/components/BlockTitle';
-import BlockContent from './BlockContent';
+import BlockContent from '@src/components/BlockContent';
 import IslandBlock from './IslandBlock';
 
 import database from '@src/scripts/firebase-database';

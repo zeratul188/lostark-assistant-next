@@ -3,8 +3,8 @@ import Image from 'next/image';
 import colors from '@src/styles/colors';
 import fontsize from '@src/styles/fontsizes';
 import breakpoints from '@src/styles/breakpoints';
-import BlockTitle from './BlockTitle';
-import BlockContent from './BlockContent';
+import BlockTitle from '@src/components/BlockTitle';
+import BlockContent from '@src/components/BlockContent';
 
 import { ref, onValue } from "firebase/database";
 import { getDownloadURL } from "firebase/storage";
