@@ -118,15 +118,25 @@ class EventColumns extends React.Component {
 class EventContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.isComponentMounted = false;
         this.state = {
             events: []
         };
         this.syncFirebase();
     }
 
+    componentDidMount = () => {
+        this.isComponentMounted = true;
+    }
+
+    componentWillUnmount = () => {
+        this.isComponentMounted = false;
+    }
+
     syncFirebase() {
         var eventRef = ref(database, 'event');
         onValue(eventRef, (snapshot) => {
+            events = [];
             snapshot.forEach((dinoSnapshot) => {
                 var event = {
                     number: 0,
@@ -153,9 +163,11 @@ class EventContainer extends React.Component {
                 });
                 getDownloadURL(storageReference(storage, 'Events/event'+event.number)).then((url) => {
                     event.imgurl = url;
-                    this.setState({
-                        events: events
-                    });
+                    if (this.isComponentMounted) {
+                        this.setState({
+                            events: events
+                        });
+                    }
                 })
                 .catch((error) => {
                     // Handle any errors
@@ -165,9 +177,11 @@ class EventContainer extends React.Component {
             events = events.sort((a, b) => {
                 return a.number - b.number;
             }).reverse();
-            this.setState({
-                events: events
-            });
+            if (this.isComponentMounted) {
+                this.setState({
+                    events: events
+                });
+            }
         })
     }
 

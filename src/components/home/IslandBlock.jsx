@@ -52,14 +52,10 @@ class IslandBlock extends React.Component {
     render() {
         return (
             <div css={css`
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-
-                @media screen and (min-width: ${breakpoints.tablet}) {
-                    grid-template-columns: 1fr 2fr;
-                }
+                display: block;
             `}>
                 <div css={css`
+                    height:100px;
                     position: relative;
                 `}>
                     <Image
@@ -69,13 +65,13 @@ class IslandBlock extends React.Component {
                 </div>
                 <div css={css`
                     padding: 10px;
-                    margin-left: 10px;
                 `}>
                     <p css={css`
                         color: ${colors.object_title};
                         margin: 0;
                         font-size: ${fontsize.title}pt;
                         font-weight: bold;
+                        text-align: center;
                     `}>{this.props.island.name}</p>
                     <p css={css`
                         font-size: 10pt;

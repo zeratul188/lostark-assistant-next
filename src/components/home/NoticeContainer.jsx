@@ -11,7 +11,20 @@ import React from 'react';
 class NoticeContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            notice: ""
+        }
+        this.isComponentMounted = false;
         this.getNoticeData();
+    }
+
+    componentDidMount = () => {
+        this.isComponentMounted = true;
+        this.getNoticeData();
+    }
+
+    componentWillUnmount = () => {
+        this.isComponentMounted = false;
     }
 
     getNoticeData() {
@@ -23,14 +36,16 @@ class NoticeContainer extends React.Component {
                     notice = dinoSnapshot.val();
                 }
             });
-            this.setState({
-                notice: notice
-            });
+            if (this.isComponentMounted) {
+                this.setState({
+                    notice: notice
+                });
+            }
         });
     }
 
     render() {
-        if (this.state === null) return [];
+        //if (this.state === null) return [];
         return(
             <>
                 <BlockTitle>

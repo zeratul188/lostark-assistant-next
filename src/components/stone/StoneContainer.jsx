@@ -19,7 +19,11 @@ class StoneContainer extends React.Component {
                     `}>증가 옵션</strong>
                 </BlockTitle>
                 <BlockContent padding='10px'>
-                    
+                    <div css={css`
+                        display: grid;
+                    `}>
+
+                    </div>
                 </BlockContent>
             </>
         )
