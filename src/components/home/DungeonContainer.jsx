@@ -27,6 +27,7 @@ var dungeons = [
 class DungeonContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.isComponentMounted = false;
         this.state = {
             name: [],
             reycle: 1,
@@ -34,6 +35,15 @@ class DungeonContainer extends React.Component {
             imgurl: ''
         };
         this.syncFirebase();
+    }
+
+    componentDidMount = () => {
+        this.isComponentMounted = true;
+        this.syncFirebase();
+    }
+
+    componentWillUnmount = () => {
+        this.isComponentMounted = false;
     }
 
     syncFirebase() {
@@ -51,9 +61,11 @@ class DungeonContainer extends React.Component {
                 }
             });
             getDownloadURL(storageReference(storage, 'Assets/Dungeon/dg'+reycle+'.png')).then((url) => {
-                this.setState({
-                    imgurl: url
-                });
+                if (this.isComponentMounted) {
+                    this.setState({
+                        imgurl: url
+                    });
+                }
             }).catch((error) => {
                 // Handle any errors
             });
@@ -62,11 +74,13 @@ class DungeonContainer extends React.Component {
                 var str = date.getFullYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDate()+"일 ~ ";
                 date.setDate(date.getDate()+14);
                 str += date.getFullYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDate()+"일";
-                this.setState({
-                    name: [dungeons[2*(reycle-1)], dungeons[2*(reycle-1)+1]],
-                    reycle: reycle,
-                    date: str
-                });
+                if (this.isComponentMounted) {
+                    this.setState({
+                        name: [dungeons[2*(reycle-1)], dungeons[2*(reycle-1)+1]],
+                        reycle: reycle,
+                        date: str
+                    });
+                }
             }
         });
     }

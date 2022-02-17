@@ -8,7 +8,7 @@ import IslandBlock from './IslandBlock';
 
 import database from '@src/scripts/firebase-database';
 import { ref, onValue } from "firebase/database";
-import React from 'react';
+import React, { useEffect } from 'react';
 import storage from '@src/scripts/firebase-storage';
 import { getDownloadURL, ref as storageReference } from "firebase/storage";
 
@@ -43,12 +43,23 @@ var awardStrings = [
 class IslandBlocks extends React.Component {
     constructor(props) {
         super(props);
+        var nullIslands = new Array(3).fill(
+            {
+                imgurl: '',
+                name: '',
+                awards: []
+            });
+        this.state = {
+            islands: nullIslands
+        }
+        this.isComponentMounted = false;
         this.getIslandData();
     }
 
     getIslandData() {
         var islandRef = ref(database, 'island');
         onValue(islandRef, (snapshot) => {
+            islands = [];
             snapshot.forEach((dinoSnapshot) => {
                 var island = {
                     imgurl: '',
@@ -81,10 +92,22 @@ class IslandBlocks extends React.Component {
                 islands.push(island);
             });
 
-            this.setState({
-                islands: islands
-            });
+            if (this.isComponentMounted) {
+                this.setState({
+                    islands: islands
+                });
+            }
+            
         });
+    }
+
+    componentDidMount = () => {
+        this.isComponentMounted = true;
+        this.getIslandData();
+    }
+
+    componentWillUnmount = () => {
+        this.isComponentMounted = false;
     }
 
     render() {
@@ -106,7 +129,16 @@ class IslandContainer extends React.Component {
         this.state = {
             time: 0
         };
+        this.isComponentMounted = false;
         this.setStartDate();
+    }
+
+    componentDidMount = () => {
+        this.isComponentMounted = true;
+    }
+
+    componentWillUnmount = () => {
+        this.isComponentMounted = false;
     }
 
     startTimeThread(date) {
@@ -118,9 +150,11 @@ class IslandContainer extends React.Component {
                 clearInterval(interval);
             }
             time--;
-            this.setState({
-                time: time
-            });
+            if (this.isComponentMounted) {
+                this.setState({
+                    time: time
+                });
+            }
         }, 1000);
     }
 
@@ -214,7 +248,11 @@ class IslandContainer extends React.Component {
                         `}>{this.getTimeString(this.state.time)}</span>
                     </span>
                 </BlockTitle>
-                <BlockContent>
+                <BlockContent css={css`
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-rows: 1;
+                `}>
                     <IslandBlocks />
                 </BlockContent>
             </>

@@ -17,12 +17,22 @@ var bosses = [];
 class BossBlocks extends React.Component {
     constructor(props) {
         super(props);
+        this.isComponentMounted = false;
         this.getBossData();
+    }
+
+    componentDidMount = () => {
+        this.isComponentMounted = true;
+    }
+
+    componentWillUnmount = () => {
+        this.isComponentMounted = false;
     }
 
     getBossData() {
         var bossRef = ref(database, 'boss');
         onValue(bossRef, (snapshot) => {
+            bosses = [];
             snapshot.forEach((dinoSnapshot) => {
                 var boss = {
                     name: '',
@@ -49,17 +59,21 @@ class BossBlocks extends React.Component {
                 });
                 getDownloadURL(storageReference(storage, 'Assets/Bosses/bs'+num+'.png')).then((url) => {
                     boss.imgurl = url;
-                    this.setState({
-                        bosses: bosses
-                    });
+                    if (this.isComponentMounted) {
+                        this.setState({
+                            bosses: bosses
+                        });
+                    }
                 }).catch((error) => {
                     // Handle any errors
                 });
                 bosses.push(boss);
             });
-            this.setState({
-                bosses: bosses
-            });
+            if (this.isComponentMounted) {
+                this.setState({
+                    bosses: bosses
+                });
+            }
         });
     }
 

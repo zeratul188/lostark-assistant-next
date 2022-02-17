@@ -77,41 +77,55 @@ class UpdateContainer extends React.Component {
             left_display: 'hidden',
             right_display: 'visible'
         };
+        this.isComponentMounted = false;
         this.syncFirebase();
+    }
+
+    componentDidMount = () => {
+        this.isComponentMounted = true;
+        this.syncFirebase();
+    }
+
+    componentWillUnmount = () => {
+        this.isComponentMounted = false;
     }
 
     btnLeft() {
         var position = this.state.index;
         position--;
-        this.setState({
-            right_display: 'visible'
-        });
-        if (position == 0) {
+        if (this.isComponentMounted) {
             this.setState({
-                left_display: 'hidden'
+                right_display: 'visible'
+            });
+            if (position == 0) {
+                this.setState({
+                    left_display: 'hidden'
+                });
+            }
+            this.setState({
+                index: position,
+                updates: cutList(position*5)
             });
         }
-        this.setState({
-            index: position,
-            updates: cutList(position*5)
-        });
     }
 
     btnRight() {
         var position = this.state.index;
         position++;
-        this.setState({
-            left_display: 'visible'
-        });
-        if (position === this.state.max-1) {
+        if (this.isComponentMounted) {
             this.setState({
-                right_display: 'hidden'
+                left_display: 'visible'
+            });
+            if (position === this.state.max-1) {
+                this.setState({
+                    right_display: 'hidden'
+                });
+            }
+            this.setState({
+                index: position,
+                updates: cutList(position*5)
             });
         }
-        this.setState({
-            index: position,
-            updates: cutList(position*5)
-        });
     }
 
     syncFirebase() {
@@ -142,19 +156,20 @@ class UpdateContainer extends React.Component {
             updates = updates.sort((a, b) => {
                 return a.number - b.number;
             }).reverse();
-            this.setState({
-                updates: cutList(0)
-            });
-            if (updates.length%5 === 0) {
+            if (this.isComponentMounted) {
                 this.setState({
-                    max: Math.floor(updates.length/5)
+                    updates: cutList(0)
                 });
-            } else {
-                this.setState({
-                    max: Math.floor(updates.length/5)+1
-                });
+                if (updates.length%5 === 0) {
+                    this.setState({
+                        max: Math.floor(updates.length/5)
+                    });
+                } else {
+                    this.setState({
+                        max: Math.floor(updates.length/5)+1
+                    });
+                }
             }
-
         });
     }
 
