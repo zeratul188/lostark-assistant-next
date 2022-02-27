@@ -1,4 +1,4 @@
-/*{
+{
   "presets": [
     [
       "next/babel",
@@ -11,8 +11,4 @@
     ]
   ],
   "plugins": ["@emotion/babel-plugin"]
-}*/
-{
-  "presets": ["next/babel"],
-  "plugins": ["babel-plugin-styled-components"]
 }
