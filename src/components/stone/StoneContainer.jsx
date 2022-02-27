@@ -1,33 +1,28 @@
 import {css} from '@emotion/react';
-import fontsize from '@src/styles/fontsizes';
-import Image from 'next/image';
-import colors from '@src/styles/colors';
+
 import breakpoints from '@src/styles/breakpoints';
+import StoneMainContainer from './StoneMainContainer';
+import StoneSubContainer from './StoneSubContainer';
 
-import BlockTitle from '@src/components/BlockTitle';
-import BlockContent from '@src/components/BlockContent';
-import React from 'react';
+const StoneContainer = () => {
+    return (
+        <div css={css`
+        width: 100%;
+        display: grid;
+        grid-template-rows: 1fr 30px 1fr;
+        grid-template-columns: 1;
 
-class StoneContainer extends React.Component {
-
-    render() {
-        return (
-            <>
-                <BlockTitle margintop='30px'>
-                    <strong css={css`
-                        font-size: ${fontsize.title}pt;
-                    `}>증가 옵션</strong>
-                </BlockTitle>
-                <BlockContent padding='10px'>
-                    <div css={css`
-                        display: grid;
-                    `}>
-
-                    </div>
-                </BlockContent>
-            </>
-        )
-    }
+        @media screen and (min-width: ${breakpoints.maxblock}) {
+          width: 1200px;
+          grid-template-columns: 3fr 30px 1fr;
+          grid-template-rows: 1;
+        }
+      `} >
+        <StoneMainContainer/>
+        <div/>
+        <StoneSubContainer />
+      </div>
+    )
 }
 
 export default StoneContainer;

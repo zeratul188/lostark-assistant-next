@@ -9,13 +9,9 @@ const HomeContainer = () => {
         <div css={css`
         width: 100%;
         display: grid;
-        margin-top: 50px;
+        margin-top: 96px;
         grid-template-rows: 1fr 30px 1fr;
         grid-template-columns: 1;
-
-        @media screen and (min-width: ${breakpoints.tablet}) {
-          margin-top: 100px;
-        }
 
         @media screen and (min-width: ${breakpoints.maxblock}) {
           width: 1200px;
