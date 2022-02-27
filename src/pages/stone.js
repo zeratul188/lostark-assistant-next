@@ -21,11 +21,7 @@ class Home extends React.Component {
   
             <div css={css`
                 width: 100%;
-                margin-top: 60px;
-
-                @media screen and (min-width: ${breakpoints.tablet}) {
-                    margin-top: 100px;
-                }
+                margin-top: 96px;
 
                 @media screen and (min-width: ${breakpoints.maxblock}) {
                     width: 1200px;

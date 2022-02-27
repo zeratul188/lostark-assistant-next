@@ -118,6 +118,7 @@ class DungeonContainer extends React.Component {
                         grid-template-columns: 1fr 1fr;
                         color: ${colors.object_title};
                         text-align: center;
+                        font-size: ${fontsize.title}pt;
                         padding: 10px;
                     `}>
                         <span>{this.state.name[0]}</span>
@@ -126,6 +127,7 @@ class DungeonContainer extends React.Component {
                     <div css={css`
                         text-align: center;
                         padding: 10px;
+                        font-size: ${fontsize.content}pt;
                     `}>
                         {this.state.date}
                     </div>

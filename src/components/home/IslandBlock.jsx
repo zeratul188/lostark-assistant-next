@@ -55,8 +55,11 @@ class IslandBlock extends React.Component {
                 display: block;
             `}>
                 <div css={css`
-                    height:100px;
+                    height:15vw;
                     position: relative;
+
+                    @media screen and (min-width: ${breakpoints.tablet}) {
+                        height:100px;
                 `}>
                     <Image
                         src={this.getIslandImage()}

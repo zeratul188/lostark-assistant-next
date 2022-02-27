@@ -235,18 +235,6 @@ class IslandContainer extends React.Component {
                         font-size: ${fontsize.title}pt;
                         color: ${colors.object_sub};
                     `}>{this.str}</span>
-                    <span css={css`
-                        float: right;
-                        display: block;
-                        font-size: ${fontsize.title}pt;
-                    `}>
-                        <span css={css`
-                            color: ${colors.object_sub};
-                        `}>남은 시간 : </span>
-                        <span css={css`
-                            color: ${colors.entersix};
-                        `}>{this.getTimeString(this.state.time)}</span>
-                    </span>
                 </BlockTitle>
                 <BlockContent css={css`
                     display: grid;
@@ -255,6 +243,22 @@ class IslandContainer extends React.Component {
                 `}>
                     <IslandBlocks />
                 </BlockContent>
+                <div css={css`
+                    width: 100%;
+                    font-size: ${fontsize.title}pt;
+                    text-align: center;
+                    background-color: #1d2026;
+                `}>
+                    <div css={css`
+                        color: ${colors.object_sub};
+                        font-size: ${fontsize.small_content}pt;
+                    `}>남은 시간</div>
+                    <div css={css`
+                        color: ${colors.entersix};
+                        margin-top: 5px;
+                        padding-bottom: 10px;
+                    `}>{this.getTimeString(this.state.time)}</div>
+                </div>    
             </>
         );
     }
