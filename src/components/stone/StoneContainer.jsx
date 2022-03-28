@@ -14,7 +14,7 @@ const StoneContainer = () => {
 
         @media screen and (min-width: ${breakpoints.maxblock}) {
           width: 1200px;
-          grid-template-columns: 3fr 30px 1fr;
+          grid-template-columns: 2fr 30px 1fr;
           grid-template-rows: 1;
         }
       `} >

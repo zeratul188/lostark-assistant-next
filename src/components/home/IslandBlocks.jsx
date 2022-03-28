@@ -97,7 +97,6 @@ class IslandBlocks extends React.Component {
                     islands: islands
                 });
             }
-            
         });
     }
 
@@ -231,34 +230,38 @@ class IslandContainer extends React.Component {
                         font-size: ${fontsize.title}pt;
                     `}>모험섬</strong>
                     <span css={css`
-                        margin-left: 20px;
                         font-size: ${fontsize.title}pt;
                         color: ${colors.object_sub};
+                        position: absolute;
+                        top: 50%;
+                        right: 15px;
+                        transform: translate(0, -50%);
                     `}>{this.str}</span>
+                    
                 </BlockTitle>
-                <BlockContent css={css`
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
-                    grid-template-rows: 1;
-                `}>
-                    <IslandBlocks />
+                <BlockContent>
+                    <div css={css`
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        grid-template-rows: 1;
+                    `}>
+                        <IslandBlocks />
+                    </div>
+                    <div css={css`
+                        width: 100%;
+                        display: block;
+                        font-size: ${fontsize.title}pt;
+                        text-align: center;
+                        padding: 15px;
+                    `}>
+                        <div css={css`
+                            color: ${colors.object_sub};
+                        `}>남은 시간</div>
+                        <div css={css`
+                            color: ${colors.entersix};
+                        `}>{this.getTimeString(this.state.time)}</div>
+                    </div>
                 </BlockContent>
-                <div css={css`
-                    width: 100%;
-                    font-size: ${fontsize.title}pt;
-                    text-align: center;
-                    background-color: #1d2026;
-                `}>
-                    <div css={css`
-                        color: ${colors.object_sub};
-                        font-size: ${fontsize.small_content}pt;
-                    `}>남은 시간</div>
-                    <div css={css`
-                        color: ${colors.entersix};
-                        margin-top: 5px;
-                        padding-bottom: 10px;
-                    `}>{this.getTimeString(this.state.time)}</div>
-                </div>    
             </>
         );
     }
