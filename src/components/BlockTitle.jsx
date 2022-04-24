@@ -7,11 +7,17 @@ const BlockTitle = (props) => {
             margin-top: ${props.margintop};
             background-color: #191b20;
             padding: 15px;
-            font-size: 10pt;
-            text-align: left;
             width: 100%;
-            display: inline-block;
+            height: 53px;
+            font-size: 10pt;
             box-sizing: border-box;
+            position: relative;
+
+            > span, > div, > strong {
+                position: absolute;
+                top: 50%;
+                transform: translate(0, -50%);
+            }
 
             @media screen and (min-width: ${breakpoints.tablet}) {
                 font-size: 14pt;
