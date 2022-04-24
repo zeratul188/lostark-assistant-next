@@ -77,8 +77,8 @@ class StoneSimulContainer extends React.Component {
                 })
             }
         } else {
-            this.state.crystals[position][this.state.progress[position]] = 2;
-            this.state.progress[position]++;
+            crystal[position][this.state.progress[position]] = 2;
+            progress_clone[position]++;
             if (this.state.percent < 75) {
                 this.setState({
                     percent: this.state.percent+10
